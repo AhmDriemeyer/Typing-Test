@@ -44,6 +44,7 @@ def ppm_test(stdscr):
 
         if "".join(current_text) == target:
             stdscr.nodelay(False)
+            return ppm
             break
 
         try:
@@ -59,19 +60,24 @@ def ppm_test(stdscr):
                 current_text.pop()
         elif len(current_text) < len(target):
             current_text.append(key)
-
+    
 
 def main(stdscr):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
 
     start_screen(stdscr)
+    cont = 0
+    avg = 0
     while True:
-        ppm_test(stdscr)
-        stdscr.addstr(2, 0, "Você completou o teste! Aperte qualquer tecla para continuar...")
+        cont += 1
+        avg += ppm_test(stdscr)
+        med = round(avg / cont)
+        stdscr.addstr(2, 0, f"Seu PPM médio é de: {med}")
+        stdscr.addstr(3, 0, "Você completou o teste! Aperte qualquer letra para continuar...")
         key = stdscr.getkey()
 
         if ord(key) == 27:
             break
-
+    
 wrapper(main)
