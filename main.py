@@ -81,3 +81,5 @@ def main(stdscr):
             break
 
 wrapper(main)
+
+# fim do programa
