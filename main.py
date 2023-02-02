@@ -79,5 +79,5 @@ def main(stdscr):
 
         if ord(key) == 27:
             break
-    
+
 wrapper(main)
